@@ -29,7 +29,7 @@ public class SamsungEvaluationController {
 	
 	@CrossOrigin
 	@GetMapping(value = "/moedas")
-    public ResponseEntity<List<MoedaVO>> listCurrency() {
+    public ResponseEntity<List<MoedaVO>> buscarMoedas() {
 	 List<Moeda> listCurrency = this.evaluationService.listAllMoedas();
 	 List<MoedaVO> listCurrencyDTO = MoedaMap.converterAll(listCurrency);
      return new ResponseEntity<>(listCurrencyDTO, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class SamsungEvaluationController {
     }
 	@CrossOrigin
     @GetMapping(value = "/documentos") 
-    public ResponseEntity<List<ItemVO>> getConversion(
+    public ResponseEntity<List<ItemVO>> buscarDocumentos(
     		     @RequestParam(value="numero",required = false) String numero,
 				 @RequestParam(value="codigoMoeda",required = false) String codigoMoeda,
 				 @RequestParam(value="dataInicio",required = false) @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate dataInicio,
