@@ -1,0 +1,69 @@
+<form #frm="ngForm" (ngSubmit)=pesquisar()>
+  
+    <h2>Searchs Criterias</h2>
+  
+    <div >
+      <mat-form-field>
+        <mat-label>Document Number</mat-label>
+        <input matInput #input [(ngModel)]="formFiltro.numero" name="numero" ngModel>
+      </mat-form-field>    
+      <mat-form-field>
+        <mat-label>Moeda</mat-label>
+        <mat-select [(value)]="formFiltro.codigoMoeda" >
+          <mat-option value="">Selecione...</mat-option>
+          <mat-option *ngFor="let moeda of listaMoedasComboBox" [value]="moeda.moedaCode">
+            {{moeda.moedaNome}}
+          </mat-option>        
+      </mat-select>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Data Inico</mat-label>
+        <input [readonly]="true" matInput [matDatepicker]="dob" [formControl]="dataInicio">
+        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+        <mat-datepicker #dob color="accent"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Data Fim</mat-label>
+        <input [readonly]="true" matInput [matDatepicker]="dob2" [formControl]="dataFim">
+        <mat-datepicker-toggle matSuffix [for]="dob2"></mat-datepicker-toggle>
+        <mat-datepicker #dob2 color="accent"></mat-datepicker>
+      </mat-form-field>
+   
+        <button id="basic" mat-button style="margin-left: 10px;background-color: rgb(127, 224, 165);width: 100px;" type="submit" mat-button >
+          Pesquisar
+        </button>
+        <button mat-button type="button" (click)="limparCampos()" mat-button style="margin-left: 10px;background-color: rgb(219, 236, 122);width: 100px;">
+          Limpar
+        </button>
+    </div>   
+  
+</form>
+<br>
+
+  <h2>Self Evoluation Results</h2>
+  <table mat-table [dataSource]="listaDataTable" class="mat-elevation-z8">  
+    <tr mat-header-row *matHeaderRowDef="cabecalhoTabela"></tr>
+    <tr mat-row *matRowDef="let row; columns: cabecalhoTabela"></tr>
+
+    <ng-container matColumnDef="Documento">
+      <th mat-header-cell *matHeaderCellDef>Documento</th>
+      <td mat-cell *matCellDef="let documento">{{ documento.numero }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Data Documento">
+      <th mat-header-cell *matHeaderCellDef>Data Documento</th>
+      <td mat-cell *matCellDef="let documento">{{ documento.dataDocumento }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Moeda">
+        <th mat-header-cell *matHeaderCellDef>Moeda</th>
+        <td mat-cell *matCellDef="let documento">{{ documento.nome }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Valor">
+        <th mat-header-cell *matHeaderCellDef>Valor</th>
+        <td mat-cell *matCellDef="let documento">{{ documento.valor }}</td>
+      </ng-container>  
+    </table>
+
+
+
+
+
